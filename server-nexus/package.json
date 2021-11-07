@@ -1,0 +1,22 @@
+{
+  "name": "server-nexus",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "^3.4.1",
+    "apollo-server": "^3.5.0",
+    "graphql": "^14.6.0",
+    "nexus": "^1.1.0"
+  },
+  "devDependencies": {
+    "prisma": "^3.4.1",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.4.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node-dev --transpile-only --no-notify api/index.ts",
+    "build": "tsc"
+  }
+}
