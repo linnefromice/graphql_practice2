@@ -1,27 +1,11 @@
-import { useState } from "react";
-
-type TaskType = {
-  id: number
-  title: string
-  description: string
-  isFinished: boolean
-  isDeleted: boolean
-  version: number
-}
-
-const tasks: TaskType[] = [...Array(3)].map((_, i) => ({
-  id: i + 1,
-  title: `title ${i + 1}`,
-  description: `description ${i + 1}`,
-  isFinished: false,
-  isDeleted: false,
-  version: 1
-}));
+import { useGetTasksQuery } from "../../generated/apollo/graphql";
 
 export const ApolloTable: React.VFC = () => {
-  const [datas, setDatas] = useState<TaskType[]>([]);
+  const { data, error, loading, fetchMore } = useGetTasksQuery()
 
-  const getDatas = () => setDatas(tasks)
+  if (loading) return <div>loading...</div>
+  if (error) return <div>{error.message}</div>
+  if (!data) return <div>NO DATAS</div>
 
   return (
     <>
@@ -34,17 +18,17 @@ export const ApolloTable: React.VFC = () => {
           </tr>
         </thead>
         <tbody>
-          {datas.map(data => (
-            <tr key={data.id}>
-              <td>{data.id}</td>
-              <td>{data.title}</td>
-              <td>{data.description}</td>
+          {data.tasks.edges?.map(edge => edge?.node && (
+            <tr key={edge.node.id}>
+              <td>{edge.node.id}</td>
+              <td>{edge.node.title}</td>
+              <td>{edge.node.description}</td>
             </tr>
           ))}
         </tbody>
       </table>
       <div>
-        <button onClick={getDatas}>GetDatas</button>
+        <button onClick={() => null}>GetDatas</button>
       </div>
     </>
   )
