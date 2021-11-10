@@ -1,10 +1,19 @@
 import '../../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { relayStylePagination } from '@apollo/client/utilities';
 
 const client = new ApolloClient({
   uri: 'http://127.0.0.1:3001/graphql',
-  cache: new InMemoryCache()
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          tasks: relayStylePagination(),
+        },
+      },
+    },
+  })
 });
 
 function MyApp({ Component, pageProps }: AppProps) {

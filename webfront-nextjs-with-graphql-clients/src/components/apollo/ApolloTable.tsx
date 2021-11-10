@@ -28,7 +28,11 @@ export const ApolloTable: React.VFC = () => {
         </tbody>
       </table>
       <div>
-        <button onClick={() => null}>GetDatas</button>
+        <button onClick={() => fetchMore({
+          variables: {
+            after: data.tasks.pageInfo.endCursor
+          }
+        })}>fetchMore</button>
       </div>
     </>
   )
