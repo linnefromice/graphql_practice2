@@ -1,3 +1,8 @@
+"""
+An ISO 8601-encoded datetime
+"""
+scalar ISO8601DateTime
+
 type Mutation {
   """
   An example field added by the generator
@@ -67,35 +72,15 @@ type Query {
   testField: String!
 }
 
-"""
-task
-"""
 type Task {
-  """
-  説明本文
-  """
-  description: String!
+  createdAt: ISO8601DateTime!
+  description: String
   id: ID!
-
-  """
-  削除済みか
-  """
-  isDeleted: Boolean!
-
-  """
-  完了済みか
-  """
-  isFinished: Boolean!
-
-  """
-  タイトル
-  """
-  title: String!
-
-  """
-  バージョン
-  """
-  version: Int!
+  isDeleted: Boolean
+  isFinished: Boolean
+  title: String
+  updatedAt: ISO8601DateTime!
+  version: Int
 }
 
 """
