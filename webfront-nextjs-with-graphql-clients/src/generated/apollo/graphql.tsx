@@ -12,6 +12,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** An ISO 8601-encoded datetime */
+  ISO8601DateTime: any;
 };
 
 export type Mutation = {
@@ -51,20 +53,16 @@ export type QueryTasksArgs = {
   last?: Maybe<Scalars['Int']>;
 };
 
-/** task */
 export type Task = {
   __typename?: 'Task';
-  /** 説明本文 */
-  description: Scalars['String'];
+  createdAt: Scalars['ISO8601DateTime'];
+  description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  /** 削除済みか */
-  isDeleted: Scalars['Boolean'];
-  /** 完了済みか */
-  isFinished: Scalars['Boolean'];
-  /** タイトル */
-  title: Scalars['String'];
-  /** バージョン */
-  version: Scalars['Int'];
+  isDeleted?: Maybe<Scalars['Boolean']>;
+  isFinished?: Maybe<Scalars['Boolean']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['ISO8601DateTime'];
+  version?: Maybe<Scalars['Int']>;
 };
 
 /** The connection type for Task. */
@@ -92,7 +90,7 @@ export type GetTasksQueryVariables = Exact<{
 }>;
 
 
-export type GetTasksQuery = { __typename?: 'Query', tasks: { __typename?: 'TaskConnection', edges?: Array<{ __typename?: 'TaskEdge', node?: { __typename?: 'Task', id: string, title: string, description: string, isFinished: boolean, isDeleted: boolean, version: number } | null | undefined } | null | undefined> | null | undefined, pageInfo: { __typename?: 'PageInfo', startCursor?: string | null | undefined, endCursor?: string | null | undefined, hasPreviousPage: boolean, hasNextPage: boolean } } };
+export type GetTasksQuery = { __typename?: 'Query', tasks: { __typename?: 'TaskConnection', edges?: Array<{ __typename?: 'TaskEdge', node?: { __typename?: 'Task', id: string, title?: string | null | undefined, description?: string | null | undefined, isFinished?: boolean | null | undefined, isDeleted?: boolean | null | undefined, version?: number | null | undefined } | null | undefined } | null | undefined> | null | undefined, pageInfo: { __typename?: 'PageInfo', startCursor?: string | null | undefined, endCursor?: string | null | undefined, hasPreviousPage: boolean, hasNextPage: boolean } } };
 
 
 export const GetTasksDocument = gql`
