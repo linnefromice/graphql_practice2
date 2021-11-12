@@ -1,0 +1,1 @@
+export { UrqlTable } from "./UrqlTable"

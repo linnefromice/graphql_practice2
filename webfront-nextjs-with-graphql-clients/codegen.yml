@@ -1,0 +1,14 @@
+overwrite: true
+schema: "../server-rails-api/server_rails_api_schema.graphql"
+documents: "src/**/*.graphql"
+generates:
+  src/generated/apollo/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+  src/generated/urql/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-urql"
