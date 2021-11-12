@@ -1,11 +1,16 @@
 import { useState } from "react";
 import { useGetTasksQuery } from "../../generated/urql/graphql";
 
+const INITIAL_FIRST = 3
 export const UrqlTable: React.VFC = () => {
-  const [after, setAfter] = useState<string|null|undefined>(null)
+  const [first, setFirst] = useState<number>(INITIAL_FIRST)
+  // const [after, setAfter] = useState<string|null|undefined>(null)
 
   const [ result, reexecuteQuery ] = useGetTasksQuery({
-    variables: { after }
+    variables: {
+      first: first,
+      // after: after
+    }
   })
   const { data, fetching, error } = result;
 
@@ -37,7 +42,8 @@ export const UrqlTable: React.VFC = () => {
         <div>
           <button
             onClick={() => {
-              setAfter(data.tasks.pageInfo.endCursor)
+              setFirst(INITIAL_FIRST + (data.tasks.edges?.length || 0))
+              // setAfter(data.tasks.pageInfo.endCursor)
               reexecuteQuery({ requestPolicy: 'network-only' });
             }}
           >
