@@ -86,6 +86,7 @@ export type TaskEdge = {
 };
 
 export type GetTasksQueryVariables = Exact<{
+  first: Scalars['Int'];
   after?: Maybe<Scalars['String']>;
 }>;
 
@@ -94,8 +95,8 @@ export type GetTasksQuery = { __typename?: 'Query', tasks: { __typename?: 'TaskC
 
 
 export const GetTasksDocument = gql`
-    query GetTasks($after: String) {
-  tasks(first: 3, after: $after) {
+    query GetTasks($first: Int!, $after: String) {
+  tasks(first: $first, after: $after) {
     edges {
       node {
         id
@@ -128,11 +129,12 @@ export const GetTasksDocument = gql`
  * @example
  * const { data, loading, error } = useGetTasksQuery({
  *   variables: {
+ *      first: // value for 'first'
  *      after: // value for 'after'
  *   },
  * });
  */
-export function useGetTasksQuery(baseOptions?: Apollo.QueryHookOptions<GetTasksQuery, GetTasksQueryVariables>) {
+export function useGetTasksQuery(baseOptions: Apollo.QueryHookOptions<GetTasksQuery, GetTasksQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetTasksQuery, GetTasksQueryVariables>(GetTasksDocument, options);
       }

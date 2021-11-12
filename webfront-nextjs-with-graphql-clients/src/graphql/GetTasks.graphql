@@ -1,5 +1,5 @@
-query GetTasks($after: String) {
-  tasks(first: 3, after: $after) {
+query GetTasks($first: Int!, $after: String) {
+  tasks(first: $first, after: $after) {
     edges {
       node {
         id
