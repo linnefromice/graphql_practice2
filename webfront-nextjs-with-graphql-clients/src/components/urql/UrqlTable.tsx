@@ -1,7 +1,12 @@
+import { useState } from "react";
 import { useGetTasksQuery } from "../../generated/urql/graphql";
 
 export const UrqlTable: React.VFC = () => {
-  const [ result ] = useGetTasksQuery()
+  const [after, setAfter] = useState<string|null|undefined>(null)
+
+  const [ result, reexecuteQuery ] = useGetTasksQuery({
+    variables: { after }
+  })
   const { data, fetching, error } = result;
 
   if (fetching) return <div>loading...</div>
@@ -28,9 +33,18 @@ export const UrqlTable: React.VFC = () => {
           ))}
         </tbody>
       </table>
-      <div>
-        <button onClick={() => null}>fetchMore</button>
-      </div>
+      {data.tasks.edges && data.tasks.pageInfo.hasNextPage && (
+        <div>
+          <button
+            onClick={() => {
+              setAfter(data.tasks.pageInfo.endCursor)
+              reexecuteQuery({ requestPolicy: 'network-only' });
+            }}
+          >
+            fetchMore
+          </button>
+        </div>
+      )}
     </>
   )
 }
