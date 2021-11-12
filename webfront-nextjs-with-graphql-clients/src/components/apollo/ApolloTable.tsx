@@ -1,7 +1,11 @@
 import { useGetTasksQuery } from "../../generated/apollo/graphql";
 
 export const ApolloTable: React.VFC = () => {
-  const { data, error, loading, fetchMore } = useGetTasksQuery()
+  const { data, error, loading, fetchMore } = useGetTasksQuery({
+    variables: {
+      first: 3
+    }
+  })
 
   if (loading) return <div>loading...</div>
   if (error) return <div>{error.message}</div>
@@ -27,13 +31,16 @@ export const ApolloTable: React.VFC = () => {
           ))}
         </tbody>
       </table>
-      <div>
-        <button onClick={() => fetchMore({
-          variables: {
-            after: data.tasks.pageInfo.endCursor
-          }
-        })}>fetchMore</button>
-      </div>
+      {data.tasks.edges && data.tasks.pageInfo.hasNextPage && (
+        <div>
+          <button onClick={() => fetchMore({
+            variables: {
+              first: 3,
+              after: data.tasks.pageInfo.endCursor
+            }
+          })}>fetchMore</button>
+        </div>
+      )}
     </>
   )
 }
