@@ -2,8 +2,9 @@ import '../../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { relayStylePagination } from '@apollo/client/utilities';
+import { createClient, Provider } from 'urql';
 
-const client = new ApolloClient({
+const apolloClient = new ApolloClient({
   uri: 'http://127.0.0.1:3001/graphql',
   cache: new InMemoryCache({
     typePolicies: {
@@ -16,10 +17,16 @@ const client = new ApolloClient({
   })
 });
 
+const urqlClient = createClient({
+  url: 'http://127.0.0.1:3001/graphql',
+})
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ApolloProvider client={client}>
-      <Component {...pageProps} />
+    <ApolloProvider client={apolloClient}>
+      <Provider value={urqlClient}>
+        <Component {...pageProps} />
+      </Provider>
     </ApolloProvider>
   )
 }
