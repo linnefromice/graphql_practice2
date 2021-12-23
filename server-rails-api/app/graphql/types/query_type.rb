@@ -7,6 +7,8 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
+# for test
+=begin
     field :success_query, String, null: true
     def success_query
       "success success_query"
@@ -17,8 +19,6 @@ module Types
       "success success_second_query"
     end
 
-# for test
-=begin
     field :first_query, String, null: true
     def first_query
       raise GraphQL::ExecutionError, 'error first_query'
