@@ -2,6 +2,8 @@ class ServerRailsApiSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
 
+  instrument(:query, Modules::QueryInstrumentation)
+
   # Union and Interface Resolution
   def self.resolve_type(abstract_type, obj, ctx)
     # TODO: Implement this function
