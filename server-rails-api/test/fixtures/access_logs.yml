@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  operationName: MyString
+  beginTime: 2021-12-28 16:24:11
+  endTime: 2021-12-28 16:24:11
+  query: MyString
+  result: MyString
+
+two:
+  operationName: MyString
+  beginTime: 2021-12-28 16:24:11
+  endTime: 2021-12-28 16:24:11
+  query: MyString
+  result: MyString

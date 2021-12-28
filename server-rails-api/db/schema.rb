@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_08_155340) do
+ActiveRecord::Schema.define(version: 2021_12_28_072411) do
+
+  create_table "access_logs", force: :cascade do |t|
+    t.string "operationName"
+    t.datetime "beginTime"
+    t.datetime "endTime"
+    t.string "query"
+    t.string "result"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "tasks", force: :cascade do |t|
     t.string "title"
