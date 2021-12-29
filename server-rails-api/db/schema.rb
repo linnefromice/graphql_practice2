@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_28_072411) do
+ActiveRecord::Schema.define(version: 2021_12_29_011305) do
 
   create_table "access_logs", force: :cascade do |t|
     t.string "operationName"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2021_12_28_072411) do
     t.string "result"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "userAgent"
+    t.string "remoteIp"
   end
 
   create_table "tasks", force: :cascade do |t|
